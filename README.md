@@ -125,6 +125,12 @@ O con:
 java -jar target/tu-archivo.jar
 ```
 
+O Docker:
+
+```bash
+docker-compose up
+```
+
 ---
 
 ## 🧪 Pruebas con Postman
