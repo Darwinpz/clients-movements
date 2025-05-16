@@ -133,11 +133,6 @@ Puedes importar la colección Postman desde el archivo `dpilaloa.clients.movemen
 
 ---
 
-## 📝 Licencia
-
-Este proyecto está bajo licencia MIT. Puedes usarlo libremente para propósitos educativos y comerciales.
-
----
 
 ## 👤 Autor
 
