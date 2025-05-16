@@ -1,0 +1,37 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: api-clients-movements
+  output:
+    ansi:
+      enabled: ALWAYS
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/clientsMovements
+    username: darwinPz
+    password: DarwinPZ2025
+  web-flux:
+    base-path: /api/v1
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+logging:
+  level:
+    org.springframework.r2dbc.connection.init: DEBUG
+    io.r2dbc: DEBUG
+  auditor:
+    mode: 'CONSOLE'
+
+control:
+  errors:
+    trace: false
+
+optimus:
+  web:
+    headers:
+      enabled: false
+    filter:
+      excluded-path-patterns:
+        defaults: actuator,swagger,api-docs,csrf

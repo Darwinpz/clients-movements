@@ -1,0 +1,34 @@
+server:
+  port: ${PORT}
+spring:
+  application:
+    name: api-clients-movements
+  output:
+    ansi:
+      enabled: ALWAYS
+  r2dbc:
+    url: ${DATABASE}
+    username: ${USERNAME}
+    password: ${PASSWORD}
+  web-flux:
+    base-path: /api/v1
+  sql:
+    init:
+      mode: embedded
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+logging:
+  auditor:
+    mode: 'CONSOLE'
+
+control:
+  errors:
+    trace: false
+
+optimus:
+  web:
+    headers:
+      enabled: false
+    filter:
+      excluded-path-patterns:
+        defaults: actuator,swagger,api-docs,csrf

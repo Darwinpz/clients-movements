@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  myapp:
+    image: myapp:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      - SPRING_R2DBC_URL=r2dbc:postgresql://postgres:5432/clientsMovements
+      - SPRING_R2DBC_USERNAME=darwinPz
+      - SPRING_R2DBC_PASSWORD=DarwinPZ2025
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: darwinPz
+      POSTGRES_PASSWORD: DarwinPZ2025
+      POSTGRES_DB: clientsMovements
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+    driver: local

@@ -1,0 +1,27 @@
+# Ignorar build
+/build
+.gradle
+out
+
+# Archivos de sistema
+.DS_Store
+*.iml
+
+# IntelliJ / VSCode
+.idea
+.vscode
+
+# Archivos del sistema operativo
+Thumbs.db
+ehthumbs.db
+
+# Archivos de log
+*.log
+
+# Cache de tests o reports
+/test-results
+/jacoco
+
+# Archivos del sistema de control de versiones
+.git
+.gitignore

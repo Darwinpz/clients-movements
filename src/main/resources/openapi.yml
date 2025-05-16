@@ -1,0 +1,1229 @@
+---
+openapi: 3.0.0
+info:
+  title: API PRUEBA TÉCNICA
+  description: |
+    Arquitectura Microservicio <br>
+    >
+    <b>Junior Engineer Software</b> `2024`<br>
+  contact:
+    name: Darwin Pilaloa Zea
+    email: dpilaloazea@gmail.com
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Development
+tags:
+  - name: Client
+    description: Client Controller
+  - name: Account
+    description: Account Controller
+  - name: Movement
+    description: Movement Controller
+  - name: Report
+    description: Report Controller
+paths:
+  /clients:
+    post:
+      tags:
+        - Client
+      summary: Create a client.
+      description: Create a new client.
+      operationId: PostClient
+      requestBody:
+        description: Client information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+            examples:
+              PostClientRequestExample:
+                $ref: '#/components/examples/ClientExample'
+      responses:
+        "200":
+          description: Client created
+        "400":
+          description: 400 Bad Request. The request information it's not correct.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "401":
+          description: 401 Unauthorized.You're not authorized to perform this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "403":
+          description: 403 Forbidden. You don't have the right permissions to execute this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "404":
+          description: 404 Not Found. The server cannot find the requested resource.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "500":
+          description: 500 Internal Server Error. An error has occurred.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "502":
+          description: 502 Bad Gateway. The service unable to get a valid response.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+    get:
+      tags:
+        - Client
+      summary: Retrieves a list of clients.
+      description: Retrieves a list of clients.
+      operationId: GetClients
+      responses:
+        "200":
+          description: Clients retrieves
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Client'
+              examples:
+                GetClientsResponseExample:
+                  $ref: '#/components/examples/ClientsResponseExample'
+        "400":
+          description: 400 Bad Request. The request information it's not correct.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "401":
+          description: 401 Unauthorized.You're not authorized to perform this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "403":
+          description: 403 Forbidden. You don't have the right permissions to execute this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "404":
+          description: 404 Not Found. The server cannot find the requested resource.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "500":
+          description: 500 Internal Server Error. An error has occurred.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "502":
+          description: 502 Bad Gateway. The service unable to get a valid response.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+  /clients/{id}:
+    get:
+      tags:
+        - Client
+      summary: Retrieve client by Id.
+      description: Retrieve client by Id.
+      operationId: GetClientById
+      parameters:
+        - name: id
+          in: path
+          description: id of the client in registration process
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/schemas/Guid'
+      responses:
+        "200":
+          description: Client retrieve
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+              examples:
+                GetClientResponseExample:
+                  $ref: '#/components/examples/ClientExample'
+        "400":
+          description: 400 Bad Request. The request information it's not correct.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "401":
+          description: 401 Unauthorized.You're not authorized to perform this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "403":
+          description: 403 Forbidden. You don't have the right permissions to execute this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "404":
+          description: 404 Not Found. The server cannot find the requested resource.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "500":
+          description: 500 Internal Server Error. An error has occurred.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "502":
+          description: 502 Bad Gateway. The service unable to get a valid response.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+    put:
+      tags:
+        - Client
+      summary: Update client and person information.
+      description: Update client and person.
+      operationId: PutClient
+      parameters:
+        - name: id
+          in: path
+          description: id of the client in registration process
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/schemas/Guid'
+      requestBody:
+        description: Client information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+            examples:
+              PutClientRequestExample:
+                $ref: '#/components/examples/ClientExample'
+      responses:
+        "200":
+          description: Update Client
+        "400":
+          description: 400 Bad Request. The request information it's not correct.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "401":
+          description: 401 Unauthorized.You're not authorized to perform this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "403":
+          description: 403 Forbidden. You don't have the right permissions to execute this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "404":
+          description: 404 Not Found. The server cannot find the requested resource.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "500":
+          description: 500 Internal Server Error. An error has occurred.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "502":
+          description: 502 Bad Gateway. The service unable to get a valid response.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+    delete:
+      tags:
+        - Client
+      summary: Delete a client.
+      description: Delete a client.
+      operationId: DeleteClient
+      parameters:
+        - name: id
+          in: path
+          description: id of the client in registration process
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/schemas/Guid'
+      responses:
+        "200":
+          description: Client Delete
+        "400":
+          description: 400 Bad Request. The request information it's not correct.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "401":
+          description: 401 Unauthorized.You're not authorized to perform this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "403":
+          description: 403 Forbidden. You don't have the right permissions to execute this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "404":
+          description: 404 Not Found. The server cannot find the requested resource.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "500":
+          description: 500 Internal Server Error. An error has occurred.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "502":
+          description: 502 Bad Gateway. The service unable to get a valid response.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+  /accounts:
+    post:
+      tags:
+        - Account
+      summary: Create a account.
+      description: Create a new account.
+      operationId: PostAccount
+      requestBody:
+        description: Account information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+      responses:
+        "200":
+          description: Account created
+        "400":
+          description: 400 Bad Request. The request information it's not correct.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "401":
+          description: 401 Unauthorized.You're not authorized to perform this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "403":
+          description: 403 Forbidden. You don't have the right permissions to execute this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "404":
+          description: 404 Not Found. The server cannot find the requested resource.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "500":
+          description: 500 Internal Server Error. An error has occurred.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "502":
+          description: 502 Bad Gateway. The service unable to get a valid response.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+    get:
+      tags:
+        - Account
+      summary: Retrieves a list of accounts.
+      description: Retrieves a list of accounts.
+      operationId: GetAccounts
+      responses:
+        "200":
+          description: Accounts retrieves
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+              examples:
+                GetAccountsResponseExample:
+                  $ref: '#/components/examples/AccountsResponseExample'
+        "400":
+          description: 400 Bad Request. The request information it's not correct.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "401":
+          description: 401 Unauthorized.You're not authorized to perform this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "403":
+          description: 403 Forbidden. You don't have the right permissions to execute this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "404":
+          description: 404 Not Found. The server cannot find the requested resource.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "500":
+          description: 500 Internal Server Error. An error has occurred.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "502":
+          description: 502 Bad Gateway. The service unable to get a valid response.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+  /accounts/{number}:
+    get:
+      tags:
+        - Account
+      summary: Retrieve account by number.
+      description: Retrieve account by number.
+      operationId: GetAccountByNumber
+      parameters:
+        - name: number
+          in: path
+          description: number of the account in registration process
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/schemas/NumberAccount'
+      responses:
+        "200":
+          description: Account retrieve
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+              examples:
+                GetAccountResponseExample:
+                  $ref: '#/components/examples/AccountResponseExample'
+        "400":
+          description: 400 Bad Request. The request information it's not correct.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "401":
+          description: 401 Unauthorized.You're not authorized to perform this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "403":
+          description: 403 Forbidden. You don't have the right permissions to execute this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "404":
+          description: 404 Not Found. The server cannot find the requested resource.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "500":
+          description: 500 Internal Server Error. An error has occurred.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "502":
+          description: 502 Bad Gateway. The service unable to get a valid response.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+    patch:
+      tags:
+        - Account
+      summary: Update account state.
+      description: Update state account.
+      operationId: PatchAccount
+      parameters:
+        - name: number
+          in: path
+          description: id of the account in registration process
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/schemas/NumberAccount'
+      requestBody:
+        description: Account information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/State'
+      responses:
+        "200":
+          description: Update Account
+        "400":
+          description: 400 Bad Request. The request information it's not correct.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "401":
+          description: 401 Unauthorized.You're not authorized to perform this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "403":
+          description: 403 Forbidden. You don't have the right permissions to execute this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "404":
+          description: 404 Not Found. The server cannot find the requested resource.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "500":
+          description: 500 Internal Server Error. An error has occurred.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "502":
+          description: 502 Bad Gateway. The service unable to get a valid response.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+    delete:
+      tags:
+        - Account
+      summary: Delete a account.
+      description: Delete a account.
+      operationId: DeleteAccount
+      parameters:
+        - name: number
+          in: path
+          description: number of the account in registration process
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/schemas/NumberAccount'
+      responses:
+        "200":
+          description: Account Delete
+        "400":
+          description: 400 Bad Request. The request information it's not correct.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "401":
+          description: 401 Unauthorized.You're not authorized to perform this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "403":
+          description: 403 Forbidden. You don't have the right permissions to execute this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "404":
+          description: 404 Not Found. The server cannot find the requested resource.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "500":
+          description: 500 Internal Server Error. An error has occurred.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "502":
+          description: 502 Bad Gateway. The service unable to get a valid response.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+  /movements:
+    post:
+      tags:
+        - Movement
+      summary: Create an movement.
+      description: Create a new movement.
+      operationId: PostMovement
+      requestBody:
+        description: Movement information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Movement'
+      responses:
+        "200":
+          description: Movement created
+        "400":
+          description: 400 Bad Request. The request information it's not correct.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "401":
+          description: 401 Unauthorized.You're not authorized to perform this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "403":
+          description: 403 Forbidden. You don't have the right permissions to execute this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "404":
+          description: 404 Not Found. The server cannot find the requested resource.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "500":
+          description: 500 Internal Server Error. An error has occurred.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "502":
+          description: 502 Bad Gateway. The service unable to get a valid response.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+    get:
+      tags:
+        - Movement
+      summary: Retrieves a list of accounts.
+      description: Retrieves a list of accounts.
+      operationId: GetMovements
+      responses:
+        "200":
+          description: Movements retrieves
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Movement'
+              examples:
+                GetMovementsResponseExample:
+                  $ref: '#/components/examples/MovementsResponseExample'
+        "400":
+          description: 400 Bad Request. The request information it's not correct.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "401":
+          description: 401 Unauthorized.You're not authorized to perform this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "403":
+          description: 403 Forbidden. You don't have the right permissions to execute this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "404":
+          description: 404 Not Found. The server cannot find the requested resource.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "500":
+          description: 500 Internal Server Error. An error has occurred.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "502":
+          description: 502 Bad Gateway. The service unable to get a valid response.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+  /movements/{id}:
+    get:
+      tags:
+        - Movement
+      summary: Retrieve account by number.
+      description: Retrieve account by number.
+      operationId: GetMovementById
+      parameters:
+        - name: id
+          in: path
+          description: number of the account in registration process
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/schemas/Guid'
+      responses:
+        "200":
+          description: Movement retrieve
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movement'
+              examples:
+                GetMovementResponseExample:
+                  $ref: '#/components/examples/MovementResponseExample'
+        "400":
+          description: 400 Bad Request. The request information it's not correct.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "401":
+          description: 401 Unauthorized.You're not authorized to perform this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "403":
+          description: 403 Forbidden. You don't have the right permissions to execute this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "404":
+          description: 404 Not Found. The server cannot find the requested resource.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "500":
+          description: 500 Internal Server Error. An error has occurred.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "502":
+          description: 502 Bad Gateway. The service unable to get a valid response.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+  /reports/{clientId}:
+    get:
+      tags:
+        - Report
+      summary: Retrieve report by date.
+      description: Retrieve account by date.
+      operationId: GetReportByDate
+      parameters:
+        - name: clientId
+          in: path
+          description: date of the movement for report
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/schemas/Guid'
+        - name: startDate
+          in: query
+          description: date Initial of the movement for report
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/schemas/Date'
+        - name: endDate
+          in: query
+          description: date Final of the movement for report
+          required: true
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/schemas/Date'
+      responses:
+        "200":
+          description: Report Movements retrieve
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Report'
+              examples:
+                GetReportsResponseExample:
+                  $ref: '#/components/examples/ReportsResponseExample'
+        "400":
+          description: 400 Bad Request. The request information it's not correct.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "401":
+          description: 401 Unauthorized.You're not authorized to perform this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "403":
+          description: 403 Forbidden. You don't have the right permissions to execute this operation.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "404":
+          description: 404 Not Found. The server cannot find the requested resource.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "500":
+          description: 500 Internal Server Error. An error has occurred.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+        "502":
+          description: 502 Bad Gateway. The service unable to get a valid response.
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+components:
+  schemas:
+    Report:
+      required:
+        - date
+        - client
+        - accountNumber
+        - type
+        - balanceInitial
+        - state
+        - amount
+        - movement
+        - balanceFinal
+      type: object
+      properties:
+        date:
+          $ref: '#/components/schemas/Date'
+        client:
+          $ref: '#/components/schemas/NameClient'
+        accountNumber:
+          $ref: '#/components/schemas/NumberAccount'
+        type:
+          $ref: '#/components/schemas/TypeAccount'
+        balanceInitial:
+          $ref: '#/components/schemas/Balance'
+        state:
+          $ref: '#/components/schemas/State'
+        amount:
+          $ref: '#/components/schemas/Amount'
+        movement:
+          $ref: '#/components/schemas/TypeMovement'
+        balanceFinal:
+          $ref: '#/components/schemas/Balance'
+    Client:
+      allOf:
+        - $ref: '#/components/schemas/Person'
+        - type: object
+          required:
+            - state
+            - password
+          properties:
+            id:
+              $ref: '#/components/schemas/Guid'
+            state:
+              $ref: '#/components/schemas/State'
+            password:
+              type: string
+              description: Password client
+              example: 89d6-47f8-bab3-180aa16b3rty
+    Date:
+      type: string
+      description: Date of movement.
+      example: "10/2/2022"
+    Person:
+      required:
+        - name
+        - gender
+        - age
+        - identification
+        - address
+        - phone
+      type: object
+      properties:
+        name:
+          type: string
+          description: Full name.
+          example: Darwin Pilaloa
+        gender:
+          type: string
+          description: Gender person.
+          example: "M"
+        age:
+          type: integer
+          description: Age of a person.
+          example: "26"
+        identification:
+          maxLength: 10
+          type: string
+          description: Person identification.
+          example: "0705463420"
+        address:
+          type: string
+          description: Person Address.
+          example: "Av. Paez y 8va C Norte"
+        phone:
+          type: string
+          description: Person phone number.
+          example: "0969140482"
+    NameClient:
+      type: string
+      description: Full name.
+      example: Darwin Pilaloa
+    Movement:
+      required:
+        - type
+        - amount
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Guid'
+        type:
+          $ref: '#/components/schemas/TypeMovement'
+        amount:
+          $ref: '#/components/schemas/Amount'
+        balance:
+          $ref: '#/components/schemas/Balance'
+        account:
+          $ref: '#/components/schemas/NumberAccount'
+        marker:
+          $ref: '#/components/schemas/RequestDate'
+    Account:
+      required:
+        - type
+        - balance
+        - state
+        - client
+      type: object
+      properties:
+        number:
+          $ref: '#/components/schemas/NumberAccount'
+        type:
+          $ref: '#/components/schemas/TypeAccount'
+        balance:
+          $ref: '#/components/schemas/Balance'
+        state:
+          $ref: '#/components/schemas/State'
+        client:
+          $ref: '#/components/schemas/Guid'
+    NumberAccount:
+      type: integer
+      format: int32
+      description: Number Account.
+      example: 478758
+    Amount:
+      type: number
+      description: Mount of movement.
+      example: 100
+    Balance:
+      type: number
+      description: Balance Initial.
+      example: 2000
+    TypeAccount:
+      type: string
+      description: Type of account.
+      example: "Ahorro"
+    TypeMovement:
+      type: string
+      description: Type of movement.
+      example: "Credito"
+    State:
+      type: boolean
+      description: State account.
+      example: true
+    RequestDate:
+      type: string
+      example: 2025-01-01 07:20:50.52Z
+    RequestId:
+      type: string
+      example: id of request
+    Guid:
+      format: uuid
+      maxLength: 36
+      minLength: 36
+      pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+      type: string
+      example: 550e8400-e29b-41d4-a716-446655440000
+    ErrorModel:
+      type: object
+      properties:
+        title:
+          maximum: 50
+          type: string
+          description: |-
+            <sup><i>(ES)</i></sup> Mensaje de error técnico.
+            <br>
+            <sup><i>(EN)</i></sup> Technical error message
+          example: Internal Server.
+        detail:
+          maximum: 50
+          type: string
+          description: |-
+            <sup><i>(ES)</i></sup> Mensaje a presentar al cliente, o error a detalle del evento
+            <br>
+            <sup><i>(EN)</i></sup> Message to display to the account, or error detailing the event
+          example: "Se produjo un error interno, lo estamos revisando."
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorList'
+        instance:
+          maximum: 50
+          type: string
+          description: |-
+            <sup><i>(ES)</i></sup> Código de catálogo de errores o Una referencia URI que identifique específicamente la aparición del problema.
+            <br>
+            <sup><i>(EN)</i></sup> Bug Catalog Code o A URI reference that specifically identifies the occurrence of the problem.
+          example: "0188"
+        type:
+          maximum: 100
+          type: string
+          description: |-
+            <sup><i>(ES)</i></sup> Una referencia URI que identifica el tipo de problema.
+            <br>
+            <sup><i>(EN)</i></sup> A URI reference that identifies the type of problem.
+          example: /v1/name/pathSuffix
+        resource:
+          type: string
+          description: |-
+            <sup><i>(ES)</i></sup> Recurso, Clase u objeto donde se genera el error.
+            <br>
+            <sup><i>(EN)</i></sup> Resource, Class or object where the error was generated.
+          example: UMPClientes0020/ConsultaInformacionCliente01
+        component:
+          type: string
+          description: |-
+            <sup><i>(ES)</i></sup> Componente de la aplicación o transacción.
+            <br>
+            <sup><i>(EN)</i></sup> Application component or transaction.
+          example: TX067050
+        backend:
+          type: string
+          description: |-
+            <sup><i>(ES)</i></sup> Código backend.
+            <br>
+            <sup><i>(EN)</i></sup> Backend code..
+          example: "00045"
+      x-reference: https://atlassian.net/wiki/spaces/CDSRL/pages/3102507010/Librer+a+para+manejo+de+Excepciones#Captura-de-errores
+    ErrorList:
+      properties:
+        code:
+          type: string
+          description: |-
+            <sup><i>(ES)</i></sup> Código de catálogo de errores.
+            <br>
+            <sup><i>(EN)</i></sup> Error catalog code.
+          example: "001"
+        message:
+          type: string
+          description: |-
+            <sup><i>(ES)</i></sup> Mensaje de error técnico.
+            <br>
+            <sup><i>(EN)</i></sup> Technical error message..
+          example: Bad Request
+        businessMessage:
+          type: string
+          description: |-
+            <sup><i>(ES)</i></sup> Mensaje de negocio.
+            <br>
+            <sup><i>(EN)</i></sup> Business message.
+          example: The xyz field is mandatory
+  responses:
+    BadRequest:
+      description: 400 Bad Request. The request information it's not correct.
+      content:
+        application/json;charset=UTF-8:
+          schema:
+            $ref: '#/components/schemas/ErrorModel'
+    Unauthorized:
+      description: 401 Unauthorized.You're not authorized to perform this operation.
+      content:
+        application/json;charset=UTF-8:
+          schema:
+            $ref: '#/components/schemas/ErrorModel'
+    Forbidden:
+      description: 403 Forbidden. You don't have the right permissions to execute this operation.
+      content:
+        application/json;charset=UTF-8:
+          schema:
+            $ref: '#/components/schemas/ErrorModel'
+    NotFound:
+      description: 404 Not Found. The server cannot find the requested resource.
+      content:
+        application/json;charset=UTF-8:
+          schema:
+            $ref: '#/components/schemas/ErrorModel'
+    InternalError:
+      description: 500 Internal Server Error. An error has occurred.
+      content:
+        application/json;charset=UTF-8:
+          schema:
+            $ref: '#/components/schemas/ErrorModel'
+    GatewayError:
+      description: 502 Bad Gateway. The service unable to get a valid response.
+      content:
+        application/json;charset=UTF-8:
+          schema:
+            $ref: '#/components/schemas/ErrorModel'
+  parameters:
+    request-date:
+      name: request-date
+      in: header
+      description: Request Date | RFC 3339 Format
+      required: true
+      schema:
+        $ref: '#/components/schemas/RequestDate'
+    request-id:
+      name: request-id
+      in: header
+      description: Request Identifier
+      required: true
+      schema:
+        $ref: '#/components/schemas/RequestId'
+    x-language:
+      name: x-language
+      in: header
+      description: ISO – 639-1  – Language Code - 2 digit code.
+      required: true
+      style: simple
+      explode: false
+      schema:
+        maxLength: 5
+        type: string
+        example: EN
+    x-guid:
+      name: x-guid
+      in: header
+      description: "Mechanism that allows to record and indetify a transaction from its origin to its destination. It allows to maintain traceability, it must be generated for each request."
+      required: true
+      style: simple
+      explode: false
+      schema:
+        $ref: '#/components/schemas/Guid'
+  examples:
+    ClientsResponseExample:
+      value:
+        - id: 236087d9-89d6-47f8-bab3-180aa16b3rty
+          name: Darwin Pilaloa
+          gender: M
+          age: 26
+          identification: "0705463420"
+          address: "Av. Paez y 8va C Norte"
+          phone: "0969140482"
+          password: 89d6-47f8-bab3-180aa16b3rty
+          state: true
+    ClientExample:
+      value:
+        id: 236087d9-89d6-47f8-bab3-180aa16b3rty
+        name: Darwin Pilaloa
+        gender: M
+        age: 26
+        identification: "0705463420"
+        address: "Av. Paez y 8va C Norte"
+        phone: "0969140482"
+        password: 89d6-47f8-bab3-180aa16b3rty
+        state: true
+    MovementsResponseExample:
+      value:
+        - id: "226087d9-89d6-47f8-bab3-180aa16b3rty"
+          type: "Credito"
+          amount: 200
+          balance: 2200
+          account: 478758
+          marker: "2025-01-01 07:20:50.52Z"
+    MovementResponseExample:
+      value:
+        id: "226087d9-89d6-47f8-bab3-180aa16b3rty"
+        type: "Credito"
+        amount: 200
+        balance: 2200
+        account: 478758
+        marker: "2025-01-01 07:20:50.52Z"
+    AccountsResponseExample:
+      value:
+        - number: 478758
+          balance: 2000
+          type: "Ahorro"
+          state: true
+          client: 236087d9-89d6-47f8-bab3-180aa16b3rty
+    AccountResponseExample:
+      value:
+        number: 478758
+        balance: 2000
+        type: "Ahorro"
+        state: true
+        client: 236087d9-89d6-47f8-bab3-180aa16b3rty
+    ReportsResponseExample:
+      value:
+        - date: "2025-01-01 07:20:50.52Z"
+          client: Darwin Pilaloa
+          account: 478758
+          type: "Ahorro"
+          balanceInitial: 2000
+          state: true
+          amount: 200
+          movement: Credito
+          balanceFinal: 2200
